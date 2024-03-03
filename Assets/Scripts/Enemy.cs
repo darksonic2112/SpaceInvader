@@ -7,15 +7,12 @@ public class Enemy : MonoBehaviour
     public int points = 3;
     public delegate void EnemyDied(int pointsWorth);
     public static event EnemyDied OnEnemyDied;
+    RaycastHit hit;
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter(Collision other)
     {
-        GetComponent<Animator>().SetTrigger("Death");
-        Destroy(collision.gameObject);
-
-        OnEnemyDied.Invoke(points);
-        
-        Destroy(gameObject);
+            Destroy(gameObject);
+            Destroy(other.gameObject);
+            OnEnemyDied.Invoke(points);
     }
-    
 }

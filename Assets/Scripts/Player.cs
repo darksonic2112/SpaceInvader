@@ -11,8 +11,8 @@ public class Player : MonoBehaviour
     private float leftSideEnd = -7f;
     private float rightSideEnd = 7f;
     private string playerAxis = "Horizontal";
-    private float bulletSpeed = 5f;
-
+    private float bulletSpeed = 10f;
+    RaycastHit hit;
     private void Start()
     {
         Enemy.OnEnemyDied += EnemyOnOnEnemyDied;
@@ -60,8 +60,9 @@ public class Player : MonoBehaviour
     void Fire()
     {
         GameObject shot = Instantiate(bulletPrefab, shottingOffset.position, Quaternion.identity);
-        Rigidbody2D shotRigidbody = shot.GetComponent<Rigidbody2D>();
-        shotRigidbody.velocity = Vector2.up * bulletSpeed;
-        Destroy(shot, 3f);
+        Rigidbody shotRigidbody = shot.GetComponent<Rigidbody>();
+        shotRigidbody.velocity = Vector2.up * bulletSpeed; 
+        if (shot != null)
+            Destroy(shot, 3f);
     }
 }
