@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.IO;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -11,14 +12,21 @@ public class EnemyBehaviour : MonoBehaviour
     public GameObject enemyPrefab2;
     public GameObject enemyPrefab3;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI highScoreText;
 
     private Enemy enemy;
     private int enemyRows = 6;
     private int enemyColumns = 3;
     private int score;
+    private int highScore;
+
+    private string highScoreFilePath = "highscore.txt";
 
     void Start()
     {
+        LoadHighScore();
+        UpdateUI();
+
         Enemy.OnEnemyDied += HandleEnemyDied;
         for (int enemyAmountColumn = 0; enemyAmountColumn <= enemyColumns; enemyAmountColumn++)
         {
@@ -39,11 +47,48 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Update()
     {
-        scoreText.text = "Score: " + score.ToString("00000");
+        UpdateUI();
     }
 
     void HandleEnemyDied(int pointsWorth)
     {
         score += pointsWorth;
+        if (score > highScore)
+        {
+            highScore = score;
+            SaveHighScore();
+        }
+    }
+
+    void UpdateUI()
+    {
+        scoreText.text = "Score: " + score.ToString("00000");
+        highScoreText.text = "High Score: " + highScore.ToString("00000");
+    }
+
+    void SaveHighScore()
+    {
+        File.WriteAllText(highScoreFilePath, highScore.ToString());
+    }
+
+    void LoadHighScore()
+    {
+        if (File.Exists(highScoreFilePath))
+        {
+            string highScoreString = File.ReadAllText(highScoreFilePath);
+            if (int.TryParse(highScoreString, out highScore))
+            {
+                Debug.Log("Loaded High Score: " + highScore);
+            }
+            else
+            {
+                Debug.LogError("Failed to parse high score from file.");
+            }
+        }
+        else
+        {
+            Debug.Log("High score file does not exist. Creating new file.");
+            SaveHighScore();
+        }
     }
 }
