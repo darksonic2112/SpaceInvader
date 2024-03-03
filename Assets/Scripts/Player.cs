@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-  public GameObject bullet;
-  public Transform shottingOffset;
+    public GameObject bulletPrefab;
+    public Transform shottingOffset;
+
+    private float moveSpeed = 10f;
+    private float leftSideEnd = -7f;
+    private float rightSideEnd = 7f;
+    private string playerAxis = "Horizontal";
+    private float bulletSpeed = 5f;
 
     private void Start()
     {
@@ -16,19 +22,46 @@ public class Player : MonoBehaviour
     {
         Enemy.OnEnemyDied -= EnemyOnOnEnemyDied;
     }
+
     void EnemyOnOnEnemyDied(int pointsWorth)
     {
         Debug.Log($"Player received 'EnemyDied' worth {pointsWorth}");
     }
+
     void Update()
     {
-      if (Input.GetKeyDown(KeyCode.Space))
-      {
-        GameObject shot = Instantiate(bullet, shottingOffset.position, Quaternion.identity);
-        Debug.Log("Bang!");
+        float playerInput = Input.GetAxis(playerAxis);
+        MovePlayer(playerInput);
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Fire();
+        }
+    }
+
+    void MovePlayer(float input)
+    {
+        GameObject player = GameObject.Find("Player");
+        float moveAmount = input * moveSpeed * Time.deltaTime;
+
+        Vector3 newPosition = player.transform.position + new Vector3(moveAmount, 0, 0);
+
+        if (newPosition.x >= leftSideEnd && newPosition.x <= rightSideEnd)
+        {
+            player.transform.Translate(new Vector3(moveAmount, 0, 0));
+        }
+        else
+        {
+            float clampedX = Mathf.Clamp(newPosition.x, leftSideEnd, rightSideEnd);
+            player.transform.position = new Vector3(clampedX, player.transform.position.y, player.transform.position.z);
+        }
+    }
+
+    void Fire()
+    {
+        GameObject shot = Instantiate(bulletPrefab, shottingOffset.position, Quaternion.identity);
+        Rigidbody2D shotRigidbody = shot.GetComponent<Rigidbody2D>();
+        shotRigidbody.velocity = Vector2.up * bulletSpeed;
         Destroy(shot, 3f);
-
-      }
     }
 }
