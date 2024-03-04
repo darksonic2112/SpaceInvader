@@ -11,6 +11,7 @@ public class EnemyBehaviour : MonoBehaviour
     public GameObject enemyPrefab1;
     public GameObject enemyPrefab2;
     public GameObject enemyPrefab3;
+    public GameObject baricades;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
 
@@ -19,6 +20,7 @@ public class EnemyBehaviour : MonoBehaviour
     private int enemyColumns = 3;
     private int score;
     private int highScore;
+    private int maxBaricades = 10;
 
     private string highScoreFilePath = "highscore.txt";
 
@@ -42,6 +44,18 @@ public class EnemyBehaviour : MonoBehaviour
                 if (enemyAmountColumn == 3)
                     Instantiate(enemyPrefab3, position, Quaternion.identity);
             }
+        }
+
+        for (int baricadeAmount = 0; baricadeAmount <= maxBaricades; baricadeAmount+=2)
+        {
+            Vector3 baricadePosition1 = new Vector3(-5 + baricadeAmount, -3.25f, -0.5f);
+            Vector3 baricadePosition2 = new Vector3(-5 + baricadeAmount + 0.25f, -3.25f, -0.5f);
+            Vector3 baricadePosition3 = new Vector3(-5 + baricadeAmount, -3f, -0.5f);
+            Vector3 baricadePosition4 = new Vector3(-5 + baricadeAmount + 0.25f, -3f, -0.5f);
+            Instantiate(baricades, baricadePosition1, Quaternion.identity);
+            Instantiate(baricades, baricadePosition2, Quaternion.identity);
+            Instantiate(baricades, baricadePosition3, Quaternion.identity);
+            Instantiate(baricades, baricadePosition4, Quaternion.identity);
         }
     }
 
