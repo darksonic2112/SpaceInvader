@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     private bool isFiring;
     private float fireCooldown = 0.5f;
     private float lastFireTime;
+    private bool upgradeWeapon;
     private void Start()
     {
         Enemy.OnEnemyDied += EnemyOnOnEnemyDied;
@@ -80,10 +81,36 @@ public class Player : MonoBehaviour
     void Fire()
     {
         audioSource.Play();
-        GameObject shot = Instantiate(bulletPrefab, shottingOffset.position, Quaternion.identity);
-        Rigidbody shotRigidbody = shot.GetComponent<Rigidbody>();
-        shotRigidbody.velocity = Vector2.up * bulletSpeed; 
-        if (shot != null)
-            Destroy(shot, 3f);
+        if (!upgradeWeapon)
+        {
+            GameObject shot = Instantiate(bulletPrefab, shottingOffset.position, Quaternion.identity);
+            Rigidbody shotRigidbody = shot.GetComponent<Rigidbody>();
+            shotRigidbody.velocity = Vector2.up * bulletSpeed;
+            if (shot != null)
+                Destroy(shot, 3f);
+        }
+        else
+        {
+            Vector3 bullet1position = new Vector3(shottingOffset.position.x - 0.1f, shottingOffset.position.y,
+                shottingOffset.position.z);
+            Vector3 bullet2position = new Vector3(shottingOffset.position.x + 0.1f, shottingOffset.position.y,
+                shottingOffset.position.z);
+            GameObject shot = Instantiate(bulletPrefab, bullet1position, Quaternion.identity);
+            GameObject shot2 = Instantiate(bulletPrefab, bullet2position, Quaternion.identity);
+            Rigidbody shotRigidbody = shot.GetComponent<Rigidbody>();
+            Rigidbody shotRigidbody2 = shot2.GetComponent<Rigidbody>();
+            shotRigidbody.velocity = Vector2.up * bulletSpeed;
+            shotRigidbody2.velocity = Vector2.up * bulletSpeed;
+            if (shot != null)
+                Destroy(shot, 3f);
+            if (shot2 != null)
+                Destroy(shot, 3f);
+        }
+
+    }
+
+    public void UpgradeWeapon()
+    {
+        upgradeWeapon = true;
     }
 }

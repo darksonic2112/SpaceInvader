@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public Transform shottingOffset;
     public delegate void EnemyDied(int pointsWorth);
     public static event EnemyDied OnEnemyDied;
+    public Player player;
 
     public float interval = 2f;
     private float timer;
@@ -35,6 +36,10 @@ public class Enemy : MonoBehaviour
         {
             timer = 0f;
             Fire();
+        }
+        if (player != null && enemySpeedUp < 0.5f)
+        {
+            player.UpgradeWeapon();
         }
         
         if (travelLeft)
@@ -83,11 +88,10 @@ public class Enemy : MonoBehaviour
     
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Collision detected");
         if (other.gameObject.CompareTag("Bullet"))
         {
             Debug.Log("speed before: " + enemySpeedUp);
-            enemySpeedUp -= 0.02f;
+            enemySpeedUp -= 0.035f;
             Debug.Log("speed after: " + enemySpeedUp);
             OnEnemyDied.Invoke(points);
             

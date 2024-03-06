@@ -1131,7 +1131,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1317003894}
   points: 30
   shottingOffset: {fileID: 2125236643}
-  deathSound: {fileID: 8300000, guid: 142d6a6cfc4d3814fb0d913d015fcf0d, type: 3}
+  player: {fileID: 303717488}
   interval: 3000
 --- !u!23 &1009101240
 MeshRenderer:
@@ -1756,7 +1756,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1317003894}
   points: 10
   shottingOffset: {fileID: 832064284}
-  deathSound: {fileID: 8300000, guid: 142d6a6cfc4d3814fb0d913d015fcf0d, type: 3}
+  player: {fileID: 303717488}
   interval: 2
 --- !u!23 &1330253089
 MeshRenderer:
@@ -1922,7 +1922,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3183606346725944361, guid: d4511b14daaa37c468a74ed386b2583f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.86
+      value: -13.62
       objectReference: {fileID: 0}
     - target: {fileID: 3183606346725944361, guid: d4511b14daaa37c468a74ed386b2583f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2194,7 +2194,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1317003894}
   points: 40
   shottingOffset: {fileID: 673364915}
-  deathSound: {fileID: 8300000, guid: 142d6a6cfc4d3814fb0d913d015fcf0d, type: 3}
+  player: {fileID: 303717488}
   interval: 3000
 --- !u!23 &1861548440
 MeshRenderer:
@@ -2521,7 +2521,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1317003894}
   points: 20
   shottingOffset: {fileID: 1644588814}
-  deathSound: {fileID: 8300000, guid: 142d6a6cfc4d3814fb0d913d015fcf0d, type: 3}
+  player: {fileID: 303717488}
   interval: 3000
 --- !u!23 &2111554933
 MeshRenderer:
