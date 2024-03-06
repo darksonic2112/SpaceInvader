@@ -10,8 +10,7 @@ public class Enemy : MonoBehaviour
     public Transform shottingOffset;
     public delegate void EnemyDied(int pointsWorth);
     public static event EnemyDied OnEnemyDied;
-    
-    private List<GameObject> enemies = new List<GameObject>();
+
     public float interval = 2f;
     private float timer;
     private float bulletSpeed = 10f;
@@ -95,7 +94,9 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
             Destroy(other.gameObject);
             
+            
         }
+        
     }
     void Fire()
     {

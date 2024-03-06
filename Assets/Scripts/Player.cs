@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public Transform shottingOffset;
+    public AudioClip shootingSound;
 
     private float moveSpeed = 10f;
     private float leftSideEnd = -7f;
@@ -13,9 +14,12 @@ public class Player : MonoBehaviour
     private string playerAxis = "Horizontal";
     private float bulletSpeed = 10f;
     RaycastHit hit;
+    private AudioSource audioSource;
     private void Start()
     {
         Enemy.OnEnemyDied += EnemyOnOnEnemyDied;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = shootingSound;
     }
 
     private void OnDestroy()
@@ -59,6 +63,7 @@ public class Player : MonoBehaviour
 
     void Fire()
     {
+        audioSource.Play();
         GameObject shot = Instantiate(bulletPrefab, shottingOffset.position, Quaternion.identity);
         Rigidbody shotRigidbody = shot.GetComponent<Rigidbody>();
         shotRigidbody.velocity = Vector2.up * bulletSpeed; 
