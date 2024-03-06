@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     private float bulletSpeed = 10f;
     RaycastHit hit;
     private AudioSource audioSource;
+    private bool isFiring;
+    private float fireCooldown = 0.5f;
+    private float lastFireTime;
     private void Start()
     {
         Enemy.OnEnemyDied += EnemyOnOnEnemyDied;
@@ -37,9 +40,22 @@ public class Player : MonoBehaviour
         float playerInput = Input.GetAxis(playerAxis);
         MovePlayer(playerInput);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
+        {
+            if (Time.time - lastFireTime >= fireCooldown)
+            {
+                isFiring = true;
+            }
+        }
+        else
+        {
+            isFiring = false;
+        }
+        if (isFiring)
         {
             Fire();
+            lastFireTime = Time.time;
+            isFiring = false;
         }
     }
 
