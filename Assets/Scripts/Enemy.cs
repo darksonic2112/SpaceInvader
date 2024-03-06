@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     private float bulletSpeed = 10f;
     RaycastHit hit;
     private float timeCounter;
-    private static float enemySpeedUp = 0.1f;
+    private static float enemySpeedUp = 1f;
     private float enemyMoveSpeed = 100f;
     private float totalDistance;
     private bool travelLeft;
@@ -37,14 +37,14 @@ public class Enemy : MonoBehaviour
             timer = 0f;
             Fire();
         }
-        if (player != null && enemySpeedUp < 0.5f)
+        if (player != null && enemySpeedUp < 0.8f)
         {
             player.UpgradeWeapon();
         }
         
         if (travelLeft)
         {
-            if (timeCounter > 0.1f)
+            if (timeCounter > enemySpeedUp)
             {
                 if ((int)totalDistance < -800)
                 {
@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            if (timeCounter > 0.1f)
+            if (timeCounter > enemySpeedUp)
             {
                 if ((int)totalDistance > 1000)
                 {
@@ -91,7 +91,7 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.CompareTag("Bullet"))
         {
             Debug.Log("speed before: " + enemySpeedUp);
-            enemySpeedUp -= 0.02f;
+            enemySpeedUp -= 0.035f;
             Debug.Log("speed after: " + enemySpeedUp);
             OnEnemyDied.Invoke(points);
             

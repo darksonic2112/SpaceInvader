@@ -36,6 +36,15 @@ public class Player : MonoBehaviour
         Debug.Log($"Player received 'EnemyDied' worth {pointsWorth}");
     }
 
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("EnemyBullet"))
+        {
+            Destroy(gameObject);
+            Destroy(other.gameObject);
+        }
+    }
+
     void Update()
     {
         float playerInput = Input.GetAxis(playerAxis);
