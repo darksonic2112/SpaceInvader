@@ -76,6 +76,7 @@ public class Player : MonoBehaviour
             float clampedX = Mathf.Clamp(newPosition.x, leftSideEnd, rightSideEnd);
             player.transform.position = new Vector3(clampedX, player.transform.position.y, player.transform.position.z);
         }
+        
     }
 
     void Fire()

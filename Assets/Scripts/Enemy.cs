@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     private float bulletSpeed = 10f;
     RaycastHit hit;
     private float timeCounter;
-    private static float enemySpeedUp = 1f;
+    private static float enemySpeedUp = 0.1f;
     private float enemyMoveSpeed = 100f;
     private float totalDistance;
     private bool travelLeft;
@@ -44,9 +44,9 @@ public class Enemy : MonoBehaviour
         
         if (travelLeft)
         {
-            if (timeCounter > enemySpeedUp)
+            if (timeCounter > 0.1f)
             {
-                if ((int)totalDistance < -1200)
+                if ((int)totalDistance < -800)
                 {
                     travelLeft = false;
                     Vector3 enemyDownStep = new Vector3(0, -enemyMoveSpeed * Time.deltaTime, 0);
@@ -65,9 +65,9 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            if (timeCounter > enemySpeedUp)
+            if (timeCounter > 0.1f)
             {
-                if ((int)totalDistance > 1500)
+                if ((int)totalDistance > 1000)
                 {
                     travelLeft = true;
                     Vector3 enemyDownStep = new Vector3(0, -enemyMoveSpeed * Time.deltaTime, 0);
@@ -91,7 +91,7 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.CompareTag("Bullet"))
         {
             Debug.Log("speed before: " + enemySpeedUp);
-            enemySpeedUp -= 0.035f;
+            enemySpeedUp -= 0.02f;
             Debug.Log("speed after: " + enemySpeedUp);
             OnEnemyDied.Invoke(points);
             
