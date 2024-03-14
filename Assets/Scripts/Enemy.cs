@@ -11,7 +11,9 @@ public class Enemy : MonoBehaviour
     public delegate void EnemyDied(int pointsWorth);
     public static event EnemyDied OnEnemyDied;
     public Player player;
-
+    public AudioClip deathSound;
+    public AudioClip shootSound;
+    
     public float interval = 2f;
     private float timer;
     private float bulletSpeed = 10f;
@@ -90,6 +92,10 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
+            GameObject audioObject = new GameObject("TempAudio");
+            AudioSource tempAudioSource = audioObject.AddComponent<AudioSource>();
+            tempAudioSource.clip = deathSound;
+            tempAudioSource.Play();
             Debug.Log("speed before: " + enemySpeedUp);
             enemySpeedUp -= 0.035f;
             Debug.Log("speed after: " + enemySpeedUp);
@@ -98,12 +104,16 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
             Destroy(other.gameObject);
             
-            
         }
         
     }
     void Fire()
     {
+        GameObject audioObject = new GameObject("TempAudio");
+        AudioSource tempAudioSource = audioObject.AddComponent<AudioSource>();
+        tempAudioSource.clip = shootSound;
+        tempAudioSource.volume = 0.1f;
+        tempAudioSource.Play();
         GameObject shot = Instantiate(bulletPrefab, shottingOffset.position, Quaternion.identity);
         Rigidbody shotRigidbody = shot.GetComponent<Rigidbody>();
         shotRigidbody.velocity = Vector2.down * bulletSpeed; 

@@ -1,12 +1,14 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
+    public AudioClip backgroundMusic;
+    
     private static GameManager _instance;
-
-    // Property to provide access to the GameManager instance
+    
     public static GameManager Instance
     {
         get
@@ -15,9 +17,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        GameObject audioObject = new GameObject("TempAudio");
+        AudioSource tempAudioSource = audioObject.AddComponent<AudioSource>();
+        tempAudioSource.clip = backgroundMusic;
+        tempAudioSource.volume = 0.8f;
+        tempAudioSource.Play();
+    }
+
     void Awake()
     {
-        // Ensure only one instance of GameManager exists
         if (_instance == null)
         {
             _instance = this;
@@ -36,19 +46,15 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator LoadAndDisplayCredits()
     {
-        // Load the Credits scene asynchronously
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Credits");
-
-        // Wait until the Credits scene has finished loading
+        
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
-
-        // Wait for 5 seconds
+        
         yield return new WaitForSeconds(5f);
-
-        // Load the Menu scene
+        
         SceneManager.LoadScene("Menu");
     }
 }

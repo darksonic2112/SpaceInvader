@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform shottingOffset;
     public AudioClip shootingSound;
-
+    public AudioClip dyingSound;
+    
     private float moveSpeed = 10f;
     private float leftSideEnd = -7f;
     private float rightSideEnd = 7f;
@@ -41,6 +42,10 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.CompareTag("EnemyBullet"))
         {
+            GameObject audioObject = new GameObject("TempAudio");
+            AudioSource tempAudioSource = audioObject.AddComponent<AudioSource>();
+            tempAudioSource.clip = dyingSound;
+            tempAudioSource.Play();
             Destroy(gameObject);
             Destroy(other.gameObject);
             GameManager.Instance.StartCredits();

@@ -160,6 +160,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 588378912}
   shottingOffset: {fileID: 1672600403}
   shootingSound: {fileID: 8300000, guid: 20e84161109c620418ae7cf0e69371ab, type: 3}
+  dyingSound: {fileID: 8300000, guid: 142d6a6cfc4d3814fb0d913d015fcf0d, type: 3}
 --- !u!65 &303717489
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1133,6 +1134,8 @@ MonoBehaviour:
   points: 30
   shottingOffset: {fileID: 2125236643}
   player: {fileID: 303717488}
+  deathSound: {fileID: 8300000, guid: 142d6a6cfc4d3814fb0d913d015fcf0d, type: 3}
+  shootSound: {fileID: 8300000, guid: 20e84161109c620418ae7cf0e69371ab, type: 3}
   interval: 3000
 --- !u!23 &1009101240
 MeshRenderer:
@@ -1781,6 +1784,8 @@ MonoBehaviour:
   points: 10
   shottingOffset: {fileID: 832064284}
   player: {fileID: 303717488}
+  deathSound: {fileID: 8300000, guid: 142d6a6cfc4d3814fb0d913d015fcf0d, type: 3}
+  shootSound: {fileID: 8300000, guid: 20e84161109c620418ae7cf0e69371ab, type: 3}
   interval: 2
 --- !u!23 &1330253089
 MeshRenderer:
@@ -2162,6 +2167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c2233ab6cabcf54c940439ad0766ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgroundMusic: {fileID: 8300000, guid: 3040800101fb0074581e4a0e0a756b43, type: 3}
 --- !u!4 &1750085561
 Transform:
   m_ObjectHideFlags: 0
@@ -2339,6 +2345,8 @@ MonoBehaviour:
   points: 40
   shottingOffset: {fileID: 673364915}
   player: {fileID: 303717488}
+  deathSound: {fileID: 8300000, guid: 142d6a6cfc4d3814fb0d913d015fcf0d, type: 3}
+  shootSound: {fileID: 8300000, guid: 20e84161109c620418ae7cf0e69371ab, type: 3}
   interval: 3000
 --- !u!23 &1861548440
 MeshRenderer:
@@ -2666,6 +2674,8 @@ MonoBehaviour:
   points: 20
   shottingOffset: {fileID: 1644588814}
   player: {fileID: 303717488}
+  deathSound: {fileID: 8300000, guid: 142d6a6cfc4d3814fb0d913d015fcf0d, type: 3}
+  shootSound: {fileID: 8300000, guid: 20e84161109c620418ae7cf0e69371ab, type: 3}
   interval: 3000
 --- !u!23 &2111554933
 MeshRenderer:
