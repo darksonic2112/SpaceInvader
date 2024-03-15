@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
         GameObject audioObject = new GameObject("TempAudio");
         AudioSource tempAudioSource = audioObject.AddComponent<AudioSource>();
         tempAudioSource.clip = backgroundMusic;
-        tempAudioSource.volume = 0.8f;
+        tempAudioSource.volume = 0.1f;
         tempAudioSource.Play();
     }
 
