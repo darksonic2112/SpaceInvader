@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public Transform shottingOffset;
     public AudioClip shootingSound;
     public AudioClip dyingSound;
+    public Animator animator;
     
     private float moveSpeed = 10f;
     private float leftSideEnd = -7f;

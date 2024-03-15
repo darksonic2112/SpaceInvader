@@ -96,6 +96,7 @@ public class Enemy : MonoBehaviour
             AudioSource tempAudioSource = audioObject.AddComponent<AudioSource>();
             tempAudioSource.clip = deathSound;
             tempAudioSource.Play();
+            GetComponent<Animator>().SetTrigger("Death");
             Debug.Log("speed before: " + enemySpeedUp);
             enemySpeedUp -= 0.035f;
             Debug.Log("speed after: " + enemySpeedUp);
